@@ -3,13 +3,12 @@
 , fetchzip
 , lib
 , libcxx
-
 , addOpenGLRunpath
 , patchelf
 , fixDarwinDylibNames
-
 , cudaSupport
 , device
+, version
 }:
 
 let
@@ -18,7 +17,6 @@ let
   # this derivation. However, we should ensure on version bumps
   # that the CUDA toolkit for `passthru.tests` is still
   # up-to-date.
-  version = "1.11.0";
   srcs = import ./libtorch-binary-hashes.nix version;
   unavailable = throw "libtorch is not available for this platform";
   libcxx-for-libtorch = if stdenv.hostPlatform.system == "x86_64-darwin" then libcxx else stdenv.cc.cc.lib;
